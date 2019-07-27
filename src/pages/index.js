@@ -1,16 +1,40 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
+import { Jumbo } from "../components"
+import { SEO } from "../components"
+import styled from 'styled-components'
 
-import { Layout, SEO } from "../components"
+export const query = graphql`
+query GET_DESCRIPTION {
+  allSite {
+    edges {
+      node {
+        siteMetadata {
+          description
+        }
+      }
+    }
+  }
+}
+`
 
-const IndexPage = () => (
-  <Layout>
+const Button = styled.button `
+  width: 120px;
+  background-color: #98ca3f;
+  border: none;
+  border-radius: 20px;
+  color: ${props => props.color};
+` 
+
+
+const IndexPage = ({data}) => (
+
+  <>
     <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
+    <Jumbo description= {data.allSite.edges[0].node.siteMetadata.description} />
+    <Button color='gray'>Comprar </Button>
+    <Link to="/gracias/">Go to gracias</Link>
+  </>
 )
 
 export default IndexPage
