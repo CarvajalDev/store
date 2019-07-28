@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`
+})
+
 module.exports = {
   siteMetadata: {
     title: `Tu Campo`,
@@ -6,6 +10,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-stripe`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -32,6 +37,13 @@ module.exports = {
       options:{
         pathToConfingModule: `src/utils/typography`
 
+      }
+    },
+    {
+      resolve: `gatsby-source-stripe`,
+      options: {
+        objects: ['Sku'],
+        secretKey: process.env.STRIPE_SK
       }
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
