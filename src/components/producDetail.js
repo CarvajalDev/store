@@ -4,7 +4,7 @@ import priceFormat from '../utils/priceFormat';
 import { Tag, SizeButton, SizeSelect, Button, StyledProductDetail, QtySelect } from '../styles/components'
 import {CartContext} from '../context'
 
-export default function producDetail({sku: id, price, product: {name, metadata}}) {
+export default function producDetail({id, price, product: {name, metadata}}) {
     const formatePrice = priceFormat(price)
     const [size, setSize] = useState(2)
     const [qty, setQty] = useState(1)
